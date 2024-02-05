@@ -1,0 +1,44 @@
+import java.util.*;
+
+public class TwoSum1 {
+
+    // HashMap approach
+    // Function definition
+    public int[] twoSumHashMap(int[] nums, int target) {
+        // The datatype of both key and value
+        Map<Integer, Integer> map = new HashMap<>();
+        
+        // Iterate through the array
+        for (int i = 0; i < nums.length; i++) {
+            int complement = target - nums[i];
+            
+            // Check if the complement is already in the HashMap
+            if (map.containsKey(complement)) {
+                // If found, return the indices of the two elements
+                return new int[]{map.get(complement), i};
+            }
+            
+            // If the complement is not in the HashMap, add the current element and its index
+            map.put(nums[i], i);
+        }
+        
+        // If no solution is found, throw an exception
+        throw new IllegalArgumentException("No two sum solution");
+    }
+
+    public static void main(String[] args) {
+        TwoSum1 twoSum = new TwoSum1();
+        int[] nums = {2, 7, 11, 15};
+        int target = 9;
+        try {
+            // Try to find the two numbers that sum to the target
+            int[] result = twoSum.twoSumHashMap(nums, target);
+            
+            // Print the result if a solution is found
+            System.out.println(Arrays.toString(result));
+        } catch (IllegalArgumentException e) {
+            // Catch the exception and print the error message if no solution is found
+            System.out.println(e.getMessage());
+        }
+    }
+}
